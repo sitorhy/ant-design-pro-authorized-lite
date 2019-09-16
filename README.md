@@ -19,7 +19,7 @@ extracted and streamline from [ant-design-pro](https://github.com/ant-design/ant
 
 ## Usage
 ```
-import {Authorized} from "ant-design-pro-authorized-lite/renderAuthorize";
+import renderAuthorize from "ant-design-pro-authorized-lite/renderAuthorize";
 ```
 ```
 const CustomAuthorized = (props) =>

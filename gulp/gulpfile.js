@@ -8,13 +8,13 @@ gulp.task("build", () =>
     gulp.src(["../src/Authorized/**/*.d.ts"]).pipe(gulp.dest("../publish"));
     gulp.src(["../*.md"]).pipe(gulp.dest("../publish"));
     gulp.src(["../LICENSE"]).pipe(gulp.dest("../publish"));
-    const {name,version}=package;
+    const {name,version,repository}=package;
     if (!fs.existsSync("../publish"))
     {
         fs.mkdirSync("../publish");
     }
     fs.writeFileSync("../publish/package.json",JSON.stringify({
-        name,version
+        name,version,repository
     }));
     return gulp
         .src(["../src/Authorized/**/*.js"])

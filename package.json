@@ -1,6 +1,11 @@
 {
   "name": "ant-design-pro-authorized-lite",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sitorhy/ant-design-pro-authorized-lite.git"
+  },
+  "license": "MIT",
   "dependencies": {
     "@babel/core": "7.5.5",
     "@svgr/webpack": "4.3.2",
