@@ -26,7 +26,7 @@ class _default extends _react.default.Component {
     });
 
     _defineProperty(this, "checkIsInstantiation", target => {
-      if (!_react.default.isValidElement(target)) {
+      if (! /*#__PURE__*/_react.default.isValidElement(target)) {
         return target;
       }
 
@@ -49,7 +49,7 @@ class _default extends _react.default.Component {
           rest = _objectWithoutPropertiesLoose(_this$props, ["ok"]);
 
       var Component = this.checkIsInstantiation(ok);
-      return Component ? _react.default.createElement(Component, rest) : null;
+      return Component ? /*#__PURE__*/_react.default.createElement(Component, rest) : null;
     });
 
     _defineProperty(this, "renderException", () => {
@@ -60,7 +60,7 @@ class _default extends _react.default.Component {
           rest = _objectWithoutPropertiesLoose(_this$props2, ["error"]);
 
       var Component = this.checkIsInstantiation(error);
-      return Component ? _react.default.createElement(Component, rest) : null;
+      return Component ? /*#__PURE__*/_react.default.createElement(Component, rest) : null;
     });
   }
 

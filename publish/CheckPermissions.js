@@ -69,7 +69,7 @@ var checkPermissions = (authority, currentAuthority, target, Exception, spinner)
 
 
   if (isPromise(authority)) {
-    return _react.default.createElement(_PromiseRender.default, {
+    return /*#__PURE__*/_react.default.createElement(_PromiseRender.default, {
       ok: target,
       error: Exception,
       promise: authority,
@@ -83,7 +83,7 @@ var checkPermissions = (authority, currentAuthority, target, Exception, spinner)
       var bool = authority(currentAuthority); // 函数执行后返回值是 Promise
 
       if (isPromise(bool)) {
-        return _react.default.createElement(_PromiseRender.default, {
+        return /*#__PURE__*/_react.default.createElement(_PromiseRender.default, {
           ok: target,
           error: Exception,
           promise: bool,

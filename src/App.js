@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import {Button, Divider, Radio, Spin} from 'antd';
-import {BrowserRouter as Router, Route, Switch, withRouter} from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { Button, Divider, Radio, Spin } from 'antd';
+import { BrowserRouter as Router, Route, Switch, withRouter } from "react-router-dom";
 
 import Authorized from "./Authorized/Authorized";
 import renderAuthorize from "./Authorized/renderAuthorize";
@@ -8,28 +8,43 @@ import renderAuthorize from "./Authorized/renderAuthorize";
 import SignInPage from "./SignInPage";
 import LogoutPage from "./LogoutPage";
 
-const RouteAuthorize2 = withRouter(({history, redirect}) =>
-{
-    useEffect(() =>
-    {
+const RouteAuthorize2 = withRouter(({ history, redirect }) => {
+    useEffect(() => {
         history.replace(redirect);
     }, [redirect, history]);
     return null;
 });
 
-const AuthTest = (props) =>
-{
+const AuthTest = (props) => {
     return renderAuthorize(["SIGN_IN"])(props);
 };
 
-function App()
-{
-    const [token, setToken] = useState("");
+class ForceUpdateComponent extends React.PureComponent {
+    state = {
+        time: Date.now().toString()
+    }
 
-    const onChange = (e) =>
-    {
+    render() {
+        const { time } = this.state;
+        return (
+            <Button>{time}</Button>
+        );
+    }
+}
+
+function App() {
+    const [token, setToken] = useState("");
+    const [forceUpdateAuth, setForceUpdateAuth] = useState("");
+
+    const toggleForceUpdateKey = () => {
+        setForceUpdateAuth(forceUpdateAuth === "test" ? "" : "test");
+    };
+
+    const onChange = (e) => {
         setToken(e.target.value);
     };
+
+    const content = <ForceUpdateComponent />;
 
     return (
         <div>
@@ -40,37 +55,41 @@ function App()
             <AuthTest authority={token ? ["SIGN_IN"] : []} noMatch={<Button type="danger">未登录</Button>}>
                 <Button type="primary">已登录</Button>
             </AuthTest>
-            <Divider/>
+            <Divider />
 
-            <AuthTest authority={token ? ["SIGN_IN"] : []} noMatch={<RouteAuthorize2 redirect="/sign"/>}>
-                <RouteAuthorize2 redirect="/logout"/>
+            <AuthTest authority={token ? ["SIGN_IN"] : []} noMatch={<RouteAuthorize2 redirect="/sign" />}>
+                <RouteAuthorize2 redirect="/logout" />
             </AuthTest>
 
             <Switch>
-                <Route path="/sign" component={SignInPage}/>
-                <Route path="/logout" component={LogoutPage}/>
+                <Route path="/sign" component={SignInPage} />
+                <Route path="/logout" component={LogoutPage} />
             </Switch>
 
-            <Divider/>
+            <Divider />
+            <div>
+                <Authorized forceUpdate noMatch={content} authority={["test"]} currentAuthority={forceUpdateAuth}>
+                    {content}
+                </Authorized>
+            </div>
+            <Button onClick={toggleForceUpdateKey}>强制更新</Button>
+            <Divider />
 
-            <Authorized authority={new Promise((r, j) =>
-            {
-                setTimeout(() =>
-                {
+            <Authorized authority={new Promise((r, j) => {
+                setTimeout(() => {
                     r();
                 }, 3000);
-            })} spinner={<Spin/>}>
+            })} spinner={<Spin />}>
                 <Button>异步显示</Button>
             </Authorized>
         </div>
     );
 }
 
-export default () =>
-{
+export default () => {
     return (
         <Router>
-            <Route path="/" component={App}/>
+            <Route path="/" component={App} />
         </Router>
     );
 };

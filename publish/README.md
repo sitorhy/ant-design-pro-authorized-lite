@@ -14,6 +14,7 @@ extracted and streamline from [ant-design-pro](https://github.com/ant-design/ant
 + `ReactNode` spinner - show it during promise doing
 + `ReactNode` Exception - invalid parameter or promise rejected
 + `ReactNode` target - passed component
++ `Boolean` forceUpdate - re-render target and Exception each time
 
 <br>
 
@@ -81,6 +82,54 @@ const RouteAuthorize = withRouter(({history, redirect}) =>
     <Route path="/a" component={SignInPage}/>
     <Route path="/b" component={LogoutPage}/>
 </Switch>
+```
+
+<br>
+
+## Force Update
+
+```
+import React from "react"
+import {Authorized} from "ant-design-pro-authorized-lite";
+
+class ForceUpdateComponent extends React.Component {
+    state = {
+        time: Date.now().toString()
+    }
+
+    render() {
+        const { time } = this.state;
+        return (
+            <div>current time : {time}</div>
+        );
+    }
+}
+
+
+class extends React.Component {
+    state = {
+        current: ""
+    };
+
+    toggleAuthority = () => {
+        this.setState({ current: this.state.current === "test" ? "" : "test" });
+    };
+
+    render() {
+        const {current}=this.state;
+        const content = <ForceUpdateComponent />;
+        return (
+            <div>
+                <Authorized forceUpdate noMatch={content} authority={["test"]} currentAuthority={current}>
+                    {content}
+                </Authorized>
+
+                <button onClick={toggleAuthority}>re-render</button>
+            </div>
+        );
+    }
+}
+
 ```
 
 <br>

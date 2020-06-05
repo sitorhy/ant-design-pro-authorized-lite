@@ -1,6 +1,6 @@
 {
   "name": "ant-design-pro-authorized-lite",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sitorhy/ant-design-pro-authorized-lite.git"
@@ -86,8 +86,11 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
     "@babel/plugin-transform-react-jsx-self": "^7.2.0",
     "@babel/plugin-transform-react-jsx-source": "^7.5.0",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
     "antd": "^3.23.2",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
